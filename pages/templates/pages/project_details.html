@@ -1,0 +1,35 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+<section class="ftco-section">
+  <div class="container mt-5">
+    <div class="row justify-content-center mb-5 pb-5">
+      <div class="col-md-7 text-center heading-section ftco-animate">
+        <span>Portofolio</span>
+        <h2>Give it a try</h2>
+        <a class="badge badge-danger" href="{{project.demo_link}}"><span class="m-6" style="padding: 5px;">Try The Demo</span></a>
+        <a class="badge badge-secondary" href="{{project.source_code}}"><span style="padding: 5px;">source code</span></a>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <img class="card-img-top" src="{{project.screenshot.url}}" alt="Card image cap">
+          <div class="card-body">
+            <h3 style="color: black;" class="card-title">{{project.title}}</h3>
+            <p class="card-text">{{project.description}}</p>
+            <hr>
+            <a href="{% url 'portofolio' %}" class="btn btn-success">Head Back</a>
+          </div>
+        </div>
+      </div>
+      {% if request.user.is_staff %}
+      <h4><a class="btn btn-seconray" href="{% url 'update-project' project.id %}">Update</a></h4>
+      <h4><a class="btn btn-danger" href="{% url 'delete-project' project.id %}">Delete</a></h4>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+
+{% endblock content %}

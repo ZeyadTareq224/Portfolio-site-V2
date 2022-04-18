@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+<section class="ftco-section">
+  <div class="container mt-5">
+    <div class="row justify-content-center mb-5 pb-5">
+      <div class="col-md-7 text-center heading-section ftco-animate">
+      </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-8">
+        <p>
+          <img src="{{certificate.cert_image.url}}" alt="" class="img-fluid">
+        </p>
+
+          
+      </div>
+      {% if request.user.is_staff %}
+      <h4><a class="btn btn-seconray" href="{% url 'update_certificate' certificate.id %}">Update</a></h4>
+      <h4><a class="btn btn-danger" href="{% url 'delete_certificate' certificate.id %}">Delete</a></h4>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+
+{% endblock content %}

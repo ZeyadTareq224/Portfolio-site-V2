@@ -1,0 +1,50 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<section class="ftco-section">
+      <div class="container mt-5">
+        <div class="row justify-content-center mb-5 pb-5">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+            <span>Portofolio</span>
+            
+            <h2>Checkout a few of my works.</h2>
+            {% if request.user.is_staff %}
+
+            <div>
+              <h4><a href="{% url 'create_project' %}">Create A Project</a></h4>
+            </div>
+            {% endif %}
+          </div>
+
+        </div>
+        <div class="row">
+          {% for project in projects %}
+          <div class="col-md-4 ftco-animate">
+            <div class="blog-entry">
+              <a href="{% url 'details-project' project.id %}" class="block-20" style="background-image: url('{{project.screenshot.url}}'); border: 2px solid whitesmoke; border-radius: 5%;">
+              </a>
+              <div class="text p-4 d-block">
+                <div class="meta mb-3">
+                </div>
+                <h3 class="heading"><a href="#">{{project.title}}</a></h3>
+                <p>Status: <span class="badge badge-primary">{{project.status}}</span></p>
+
+                {% if request.user.is_staff %}
+          <h4><a class="btn btn-secondary" href="{% url 'update-project'  project.id %}">Update</a></h4>
+          <span><h4><a class="btn btn-danger" href="{% url 'delete-project' project.id %}">Delete</a></h4></span>
+          {% endif %}
+              </div>
+
+            </div>
+
+          </div>
+          
+          
+          {% endfor %}
+
+        </div>
+
+      </div>
+      
+
+    </section>
+{% endblock content %}

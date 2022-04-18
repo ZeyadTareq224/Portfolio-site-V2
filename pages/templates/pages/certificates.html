@@ -1,0 +1,50 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<section class="ftco-section">
+      <div class="container mt-5">
+        <div class="row justify-content-center mb-5 pb-5">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+            <span>Certificates</span>
+            
+            <h2>Checkout few of my achivements.</h2>
+            {% if request.user.is_authenticated %}
+
+            <div>
+              <h4><a href="{% url 'create_certificate' %}">Create A Certificate</a></h4>
+            </div>
+            {% endif %}
+          </div>
+
+        </div>
+        <div class="row">
+          {% for cert in certificates %}
+          <div class="col-md-4 ftco-animate">
+            <div class="blog-entry">
+              <a href="{% url 'certificate_details' cert.id %}" class="block-20" style="background-image: url('{{cert.cert_image.url}}'); border: 2px solid whitesmoke; border-radius: 5%;">
+              </a>
+              <div class="text p-4 d-block">
+                <div class="meta mb-3">
+                 
+                </div>
+                
+
+                {% if request.user.is_staff %}
+          <h4><a class="btn btn-secondary" href="{% url 'update_certificate' cert.id %}">Update</a></h4>
+          <span><h4><a class="btn btn-danger" href="{% url 'delete_certificate' cert.id %}">Delete</a></h4></span>
+          {% endif %}
+              </div>
+
+            </div>
+
+          </div>
+          
+          
+          {% endfor %}
+
+        </div>
+
+      </div>
+      
+
+    </section>
+{% endblock content %}
